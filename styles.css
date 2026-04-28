@@ -1,0 +1,211 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.calculator {
+    background: linear-gradient(145deg, #2d3748, #1a202c);
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow:
+        0 25px 50px rgba(0, 0, 0, 0.4),
+        0 0 0 1px rgba(255, 215, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 215, 0, 0.2);
+    max-width: 320px;
+    width: 100%;
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.calculator:hover {
+    transform: translateY(-5px);
+    box-shadow:
+        0 35px 70px rgba(0, 0, 0, 0.5),
+        0 0 0 1px rgba(255, 215, 0, 0.3);
+}
+
+.display {
+    background: linear-gradient(145deg, #000000, #1a1a1a);
+    border-radius: 16px;
+    padding: 24px 20px;
+    margin-bottom: 24px;
+    border: 2px solid rgba(255, 215, 0, 0.3);
+    box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.display::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+    transition: left 0.6s;
+}
+
+.display.active::before {
+    left: 100%;
+}
+
+.input,
+.output {
+    color: #ffffff;
+    font-size: 2.2em;
+    font-weight: 300;
+    text-align: right;
+    line-height: 1.2;
+    min-height: 1.2em;
+    letter-spacing: 0.5px;
+}
+
+.output {
+    font-size: 2.8em;
+    font-weight: 400;
+    color: #ffd700;
+    text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+    margin-bottom: 8px;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+button {
+    height: 64px;
+    border: none;
+    border-radius: 16px;
+    font-size: 1.4em;
+    font-weight: 500;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+button:hover::before {
+    left: 100%;
+}
+
+button:active {
+    transform: scale(0.95) translateY(2px);
+}
+
+.number {
+    background: linear-gradient(145deg, #4a5568, #2d3748);
+    color: #e2e8f0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow:
+        0 8px 16px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.number:hover {
+    background: linear-gradient(145deg, #5a6b7d, #3d5169);
+    color: #f7fafc;
+    transform: translateY(-2px);
+    box-shadow:
+        0 12px 24px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+.operator {
+    background: linear-gradient(145deg, #ffd700, #ffed4a);
+    color: #1a202c;
+    font-weight: 600;
+    box-shadow:
+        0 8px 16px rgba(255, 215, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.operator:hover {
+    background: linear-gradient(145deg, #ffed4a, #ffe066);
+    transform: translateY(-2px);
+    box-shadow:
+        0 12px 24px rgba(255, 215, 0, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.equals {
+    background: linear-gradient(145deg, #48bb78, #38a169);
+    color: white;
+    font-weight: 700;
+    box-shadow:
+        0 8px 16px rgba(72, 187, 120, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+    grid-column: span 2;
+}
+
+.equals:hover {
+    background: linear-gradient(145deg, #38a169, #2f855a);
+    transform: translateY(-2px);
+    box-shadow:
+        0 12px 24px rgba(72, 187, 120, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+.clear {
+    background: linear-gradient(145deg, #f56565, #e53e3e);
+    color: white;
+    font-weight: 600;
+    box-shadow:
+        0 8px 16px rgba(245, 101, 101, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.clear:hover {
+    background: linear-gradient(145deg, #e53e3e, #c53030);
+    transform: translateY(-2px);
+    box-shadow:
+        0 12px 24px rgba(245, 101, 101, 0.6),
+        inset 0 1px 0 rgba(255, 255, 255, 0.4);
+}
+
+@media (max-width: 480px) {
+    .calculator {
+        padding: 20px;
+        margin: 10px;
+    }
+
+    .output {
+        font-size: 2.4em;
+    }
+
+    .input {
+        font-size: 1.8em;
+    }
+
+    button {
+        height: 56px;
+        font-size: 1.2em;
+    }
+}
